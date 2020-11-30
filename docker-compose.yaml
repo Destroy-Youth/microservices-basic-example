@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  eureka:
+    container_name: eureka
+    build: 
+      context: ./gft-eureka-ms/
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+  zuul:
+    container_name: zuul
+    build: 
+      context: ./gft-zuul/
+      dockerfile: Dockerfile
+    depends_on: 
+    - eureka
+    ports:
+      - "8101:8101"
+  data:
+    container_name: data
+    build: 
+      context: ./gft-data-ms/
+      dockerfile: Dockerfile
+    depends_on:
+      - eureka
+    ports:
+      - "8106:8106"
+  config-server:
+    container_name: config-server
+    build: 
+      context: ./gft-config-server/
+      dockerfile: Dockerfile
+    depends_on:
+      - eureka
+    ports:
+      - "8102:8102"
+  clients:
+    container_name: clients
+    build: 
+      context: ./gft-clients-ms/
+      dockerfile: Dockerfile
+    depends_on:
+       eureka:
+        condition: service_started
+       config-server:
+        condition: service_started
+       zuul:
+        condition: service_started
+       data:
+        condition: service_started
+    ports:
+      - "8103:8103"
+    environment:
+      - CONFIG_SERVER=config-server
