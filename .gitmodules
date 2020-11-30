@@ -1,0 +1,15 @@
+[submodule "gft-zuul"]
+	path = gft-zuul
+	url = https://github.com/Destroy-Youth/gft-zuul.git
+[submodule "gft-eureka-ms"]
+	path = gft-eureka-ms
+	url = https://github.com/Destroy-Youth/gft-eureka-ms.git
+[submodule "gft-data-ms"]
+	path = gft-data-ms
+	url = https://github.com/Destroy-Youth/gft-data-ms.git
+[submodule "gft-config-server"]
+	path = gft-config-server
+	url = https://github.com/Destroy-Youth/gft-config-server.git
+[submodule "gft-clients-ms"]
+	path = gft-clients-ms
+	url = https://github.com/Destroy-Youth/gft-clients-ms.git
